@@ -1,29 +1,9 @@
 import Image from "next/image";
-import { FC, ReactNode } from "react";
 import dynamic from "next/dynamic";
 import Link from "../components/Link";
+import Item from "../components/Item";
 
 const ThemeSelect = dynamic(() => import("../components/ThemeSelect"));
-
-type ItemProps = {
-  left: ReactNode | string;
-  title: ReactNode | string;
-  detail?: string;
-};
-
-const Item: FC<ItemProps> = ({ left, title, detail }) => {
-  return (
-    <div className="flex flex-col md:flex-row ml-4 md:ml-0">
-      <div className="w-[15ch] mr-9 text-gray-400 dark:text-gray-500">
-        {left}
-      </div>
-      <div className="w-full">
-        <div className="text-gray-900 dark:text-gray-50">{title}</div>
-        {detail && <div>{detail}</div>}
-      </div>
-    </div>
-  );
-};
 
 export default function Home() {
   return (
