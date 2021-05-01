@@ -20,7 +20,7 @@ class MyDocument extends Document {
             rel="preload"
             href="/fonts/Switzer-Variable.ttf"
             as="font"
-            type="font/truetype"
+            type="font/ttf"
             crossOrigin="anonymous"
           />
         </Head>
