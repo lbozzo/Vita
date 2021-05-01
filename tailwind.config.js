@@ -47,7 +47,7 @@ module.exports = {
             letterSpacing: theme("letterSpacing.normal"),
             fontSize: theme("fontSize.base"),
             "h2,h3": {
-              color: theme("colors.gray.800"),
+              color: theme("colors.gray.900"),
               fontWeight: "inherit",
             },
             h2: {
@@ -63,13 +63,13 @@ module.exports = {
             },
             a: {
               display: "inline",
-              color: theme("colors.gray.800"),
+              color: theme("colors.gray.900"),
               fontWeight: "inherit",
               textDecoration: "none",
               borderBottomWidth: 1,
               borderBottomColor: "transparent",
               "&:hover": {
-                borderBottomColor: theme("colors.gray.800"),
+                borderBottomColor: theme("colors.gray.900"),
               },
             },
           },
