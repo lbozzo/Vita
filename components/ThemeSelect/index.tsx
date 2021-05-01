@@ -38,7 +38,7 @@ const ThemeSelect = () => {
             size: 18,
           })}
         </span>
-        <span className="ml-2 text-gray-900 dark:text-gray-300">
+        <span className="ml-2 font-normal text-gray-900 dark:text-gray-300">
           {options.find((el) => el.value === theme).label}
         </span>
       </span>

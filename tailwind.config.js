@@ -25,30 +25,24 @@ module.exports = {
         prose: "67ch",
       },
       fontFamily: {
-        sans: ["Switzer", ...fontFamily.sans],
+        sans: ["Inter", ...fontFamily.sans],
       },
       fontSize: {
         title: "21px",
         base: "14px",
       },
-      fontWeight: {
-        light: 330,
-        normal: 400,
-      },
       letterSpacing: {
-        normal: "0.45px",
+        normal: "0px",
       },
       typography: (theme) => ({
         DEFAULT: {
           css: {
             color: theme("colors.gray.500"),
-            fontWeight: theme("fontWeight.light"),
-            fontSmooth: "5em",
-            letterSpacing: theme("letterSpacing.normal"),
             fontSize: theme("fontSize.base"),
-            "h2,h3": {
+            fontWeight: theme("fontWeight.light"),
+            "h2,h3,h4,h5,h6": {
               color: theme("colors.gray.900"),
-              fontWeight: theme("fontWeight.normal"),
+              fontWeight: theme("fontWeight.light"),
             },
             h2: {
               fontSize: theme("fontSize.title"),
@@ -64,7 +58,6 @@ module.exports = {
             a: {
               display: "inline",
               color: theme("colors.gray.900"),
-              fontWeight: theme("fontWeight.light"),
               textDecoration: "none",
               borderBottomWidth: 1,
               borderBottomColor: "transparent",
@@ -77,12 +70,11 @@ module.exports = {
         dark: {
           css: {
             color: theme("colors.gray.300"),
-            fontWeight: theme("fontWeight.light"),
-            letterSpacing: theme("letterSpacing.normal"),
             fontSize: theme("fontSize.base"),
-            "h2,h3": {
+            fontWeight: theme("fontWeight.light"),
+            "h2,h3,h4,h5,h6": {
               color: theme("colors.gray.100"),
-              fontWeight: theme("fontWeight.normal"),
+              fontWeight: theme("fontWeight.light"),
             },
             h2: {
               fontSize: theme("fontSize.title"),
@@ -98,7 +90,6 @@ module.exports = {
             a: {
               display: "inline",
               color: theme("colors.gray.100"),
-              fontWeight: theme("fontWeight.light"),
               textDecoration: "none",
               borderBottomWidth: 1,
               borderBottomColor: "transparent",

@@ -13,7 +13,9 @@ const Item: FC<ItemProps> = ({ left, title, detail }) => {
         {left}
       </div>
       <div className="w-full">
-        <div className="text-gray-900 dark:text-gray-100">{title}</div>
+        <div className="font-normal text-gray-900 dark:text-gray-100">
+          {title}
+        </div>
         {detail && <div>{detail}</div>}
       </div>
     </div>

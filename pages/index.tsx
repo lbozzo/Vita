@@ -2,12 +2,13 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import Link from "../components/Link";
 import Item from "../components/Item";
+import Container from "../components/Container";
 
 const ThemeSelect = dynamic(() => import("../components/ThemeSelect"));
 
 export default function Home() {
   return (
-    <div className="prose dark:prose-dark mx-auto max-w-prose">
+    <Container>
       <div className="flex flex-1 items-center">
         <div className="relative w-[92px] h-[92px]">
           <div className="h-full w-full rounded-full overflow-hidden bg-gray-100 dark:bg-gray-700">
@@ -21,14 +22,30 @@ export default function Home() {
             />
           </div>
           <div className="flex items-center justify-center absolute bottom-0 right-0 w-7 h-7 rounded-full shadow-sm border bg-white dark:bg-gray-500 border-gray-200 dark:border-gray-600">
-            <span className="text-[12px]">&#x1F44B;</span>
+            <span className="text-[12px] pr-1">&#x1F44B;</span>
           </div>
         </div>
         <div className="flex-1 ml-4">
           <h2>Lucas Bozzo</h2>
           <div>Web Developer based in London.</div>
           <div>
-            <span className="text-gray-400 dark:text-gray-300 underline">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width={18}
+              height={18}
+              viewBox="0 0 24 24"
+              strokeWidth={2}
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="inline text-green-500 pr-1"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <circle cx="12" cy="12" r="9"></circle>
+              <path d="M9 12l2 2l4 -4"></path>
+            </svg>
+            <span className="text-green-500 dark:text-green-500 underline">
               Available for work.
             </span>
           </div>
@@ -37,10 +54,9 @@ export default function Home() {
       <section className="my-9">
         <h3>About</h3>
         <div className="ml-4 md:ml-0">
-          I&apos;m a Web Developer and aspiring UI Designer. I consider myself
-          as a traveler and coffee addict. I&apos;m from Panama, but I&apos;m
-          living in the United Kingdom. I love to work on projects and learn as
-          much as I can.
+          I&apos;m a full-stack developer and aspiring UI Designer focused on
+          Web technologies and hybrid mobile apps. I'm based in London, United
+          Kingdom. I consider myself as a traveler and coffee addict.
         </div>
       </section>
       <section className="my-16">
@@ -164,6 +180,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </div>
+    </Container>
   );
 }
