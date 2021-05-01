@@ -7,7 +7,7 @@ const ThemeSelect = dynamic(() => import("../components/ThemeSelect"));
 
 export default function Home() {
   return (
-    <div className="prose dark:prose-dark mx-auto max-w-prose font-normal md:font-light">
+    <div className="prose dark:prose-dark mx-auto max-w-prose">
       <div className="flex flex-1 items-center">
         <div className="relative w-[92px] h-[92px]">
           <div className="h-full w-full rounded-full overflow-hidden bg-gray-100 dark:bg-gray-700">

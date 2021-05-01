@@ -32,8 +32,8 @@ module.exports = {
         base: "14px",
       },
       fontWeight: {
-        light: 350,
-        normal: 415,
+        light: 330,
+        normal: 400,
       },
       letterSpacing: {
         normal: "0.45px",
@@ -42,13 +42,13 @@ module.exports = {
         DEFAULT: {
           css: {
             color: theme("colors.gray.500"),
-            fontWeight: "inherit",
+            fontWeight: theme("fontWeight.light"),
             fontSmooth: "5em",
             letterSpacing: theme("letterSpacing.normal"),
             fontSize: theme("fontSize.base"),
             "h2,h3": {
               color: theme("colors.gray.900"),
-              fontWeight: "inherit",
+              fontWeight: theme("fontWeight.normal"),
             },
             h2: {
               fontSize: theme("fontSize.title"),
@@ -64,7 +64,7 @@ module.exports = {
             a: {
               display: "inline",
               color: theme("colors.gray.900"),
-              fontWeight: "inherit",
+              fontWeight: theme("fontWeight.light"),
               textDecoration: "none",
               borderBottomWidth: 1,
               borderBottomColor: "transparent",
@@ -77,12 +77,12 @@ module.exports = {
         dark: {
           css: {
             color: theme("colors.gray.300"),
-            fontWeight: "inherit",
+            fontWeight: theme("fontWeight.light"),
             letterSpacing: theme("letterSpacing.normal"),
             fontSize: theme("fontSize.base"),
             "h2,h3": {
               color: theme("colors.gray.100"),
-              fontWeight: "inherit",
+              fontWeight: theme("fontWeight.normal"),
             },
             h2: {
               fontSize: theme("fontSize.title"),
@@ -98,7 +98,7 @@ module.exports = {
             a: {
               display: "inline",
               color: theme("colors.gray.100"),
-              fontWeight: "inherit",
+              fontWeight: theme("fontWeight.light"),
               textDecoration: "none",
               borderBottomWidth: 1,
               borderBottomColor: "transparent",
