@@ -1,35 +1,9 @@
 import Image from "next/image";
 import { FC, ReactNode } from "react";
-import { ArrowUpRightIcon } from "../components/Icons";
 import dynamic from "next/dynamic";
+import Link from "../components/Link";
 
 const ThemeSelect = dynamic(() => import("../components/ThemeSelect"));
-
-type LinkProps = {
-  src?: string;
-};
-
-const Link: FC<LinkProps> = ({ src, children }) => {
-  return src ? (
-    <div className="block whitespace-nowrap">
-      <a
-        href={src}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline"
-      >
-        {children}
-      </a>
-      <ArrowUpRightIcon
-        size={12}
-        strokeWidth={1.5}
-        className="inline ml-[2px] mb-[2px]"
-      />
-    </div>
-  ) : (
-    <>{children}</>
-  );
-};
 
 type ItemProps = {
   left: ReactNode | string;
