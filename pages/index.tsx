@@ -18,8 +18,8 @@ export default function Home() {
               height={120}
               objectFit="cover"
               quality={100}
-              loading="eager"
-              alt="Lucas Bozzo - Web Developer"
+              loading="lazy"
+              alt="Lucas Bozzo"
             />
           </div>
           <div className="flex items-center justify-center absolute bottom-0 right-0 w-7 h-7 rounded-full shadow-sm border bg-white dark:bg-gray-500 border-gray-200 dark:border-gray-600">

@@ -23,6 +23,13 @@ class MyDocument extends Document {
             type="font/woff2"
             crossOrigin="anonymous"
           />
+          <link
+            rel="preload"
+            href="/fonts/Inter-Light.woff"
+            as="font"
+            type="font/woff"
+            crossOrigin="anonymous"
+          />
         </Head>
         <body className="bg-white dark:bg-gray-900">
           <Main />
