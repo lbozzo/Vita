@@ -1,5 +1,9 @@
 import Image from "next/image";
 import { FC, ReactNode } from "react";
+import { ArrowUpRightIcon } from "../components/Icons";
+import dynamic from "next/dynamic";
+
+const ThemeSelect = dynamic(() => import("../components/ThemeSelect"));
 
 type LinkProps = {
   src?: string;
@@ -7,26 +11,20 @@ type LinkProps = {
 
 const Link: FC<LinkProps> = ({ src, children }) => {
   return src ? (
-    <div className="flex flex-row items-center">
-      <a href={src} target="_blank" rel="noopener noreferrer">
+    <div className="block whitespace-nowrap">
+      <a
+        href={src}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline"
+      >
         {children}
       </a>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="inline ml-[2px] mb-[2px]"
-        width={12}
-        height={12}
-        viewBox="0 0 24 24"
+      <ArrowUpRightIcon
+        size={12}
         strokeWidth={1.5}
-        stroke="currentColor"
-        fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <line x1="17" y1="7" x2="7" y2="17"></line>
-        <polyline points="8 7 17 7 17 16"></polyline>
-      </svg>
+        className="inline ml-[2px] mb-[2px]"
+      />
     </div>
   ) : (
     <>{children}</>
@@ -42,9 +40,11 @@ type ItemProps = {
 const Item: FC<ItemProps> = ({ left, title, detail }) => {
   return (
     <div className="flex flex-col md:flex-row ml-4 md:ml-0">
-      <div className="w-[15ch] mr-9 text-gray-400">{left}</div>
+      <div className="w-[15ch] mr-9 text-gray-400 dark:text-gray-500">
+        {left}
+      </div>
       <div className="w-full">
-        <div className="text-gray-900">{title}</div>
+        <div className="text-gray-900 dark:text-gray-50">{title}</div>
         {detail && <div>{detail}</div>}
       </div>
     </div>
@@ -53,10 +53,10 @@ const Item: FC<ItemProps> = ({ left, title, detail }) => {
 
 export default function Home() {
   return (
-    <div className="prose mx-auto max-w-prose font-normal md:font-light">
+    <div className="prose dark:prose-dark mx-auto max-w-prose font-normal md:font-light">
       <div className="flex flex-1 items-center">
         <div className="relative w-[92px] h-[92px]">
-          <div className="h-full w-full  rounded-full overflow-hidden bg-gray-100">
+          <div className="h-full w-full  rounded-full overflow-hidden bg-gray-100 dark:bg-gray-700">
             <Image
               src="/images/me.jpeg"
               width={120}
@@ -66,7 +66,7 @@ export default function Home() {
               loading="lazy"
             />
           </div>
-          <div className="flex items-center justify-center absolute bottom-0 right-0 w-7 h-7 rounded-full shadow-sm border bg-white border-gray-200">
+          <div className="flex items-center justify-center absolute bottom-0 right-0 w-7 h-7 rounded-full shadow-sm border bg-white dark:bg-gray-500 border-gray-200 dark:border-gray-600">
             <span className="text-[12px]">&#x1F44B;</span>
           </div>
         </div>
@@ -91,9 +91,16 @@ export default function Home() {
         <h3>Side Projects</h3>
         <div className="inline-block pt-6 w-full">
           <Item
-            left="2021"
+            left="2021 - Now"
             title={<Link src="https://cuspide.vercel.app">Cuspide</Link>}
             detail="Positive mindset. Motivational quotes to reach your true potential. Inspired by Maslow's hierarchy of needs."
+          />
+        </div>
+        <div className="my-9">
+          <Item
+            left="2021 - Now"
+            title="Inara Labs"
+            detail="High quality and performant websites for entrepreneurs and small businesses."
           />
         </div>
       </section>
@@ -109,11 +116,7 @@ export default function Home() {
         <div className="my-9">
           <Item
             left="2017 — 2019"
-            title={
-              <Link src="https://www.copaair.com">
-                Business Systems Analyst at Copa Airlines
-              </Link>
-            }
+            title="Business Systems Analyst at Copa Airlines"
             detail="Panama"
           />
         </div>
@@ -186,6 +189,23 @@ export default function Home() {
               <Link src="https://instagram.com/lucasbozzo">lucasbozzo</Link>
             }
           />
+        </div>
+      </section>
+      <section className="my-16">
+        <div className="flex flex-col-reverse sm:flex-row items-start sm:items-center justify-between w-full">
+          <div className="text-[12px] mr-4 my-4">
+            {process.env.NEXT_PUBLIC_LAST_UPDATED && (
+              <span>
+                Last updated{" "}
+                {new Date(
+                  process.env.NEXT_PUBLIC_LAST_UPDATED
+                ).toLocaleDateString()}
+              </span>
+            )}
+          </div>
+          <div className="min-w-max w-40">
+            <ThemeSelect />
+          </div>
         </div>
       </section>
     </div>
