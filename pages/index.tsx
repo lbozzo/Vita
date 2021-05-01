@@ -10,7 +10,7 @@ export default function Home() {
     <div className="prose dark:prose-dark mx-auto max-w-prose font-normal md:font-light">
       <div className="flex flex-1 items-center">
         <div className="relative w-[92px] h-[92px]">
-          <div className="h-full w-full  rounded-full overflow-hidden bg-gray-100 dark:bg-gray-700">
+          <div className="h-full w-full rounded-full overflow-hidden bg-gray-100 dark:bg-gray-700">
             <Image
               src="/images/me.jpeg"
               width={120}
@@ -28,7 +28,9 @@ export default function Home() {
           <h2>Lucas Bozzo</h2>
           <div>Web Developer based in London.</div>
           <div>
-            <span className="text-gray-400 underline">Available for work.</span>
+            <span className="text-gray-400 dark:text-gray-300 underline">
+              Available for work.
+            </span>
           </div>
         </div>
       </div>

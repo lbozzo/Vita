@@ -8,7 +8,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        gray: colors.trueGray,
+        gray: {
+          50: "#f9faf8",
+          100: "#f0f1f1",
+          200: "#dddde0",
+          300: "#b9bbbe",
+          400: "#727678",
+          500: "#636363",
+          600: "#595653",
+          700: "#44403f",
+          800: "#2e2b2c",
+          900: "#1c1a1c",
+        },
       },
       maxWidth: {
         prose: "67ch",
@@ -21,7 +32,7 @@ module.exports = {
         base: "14px",
       },
       fontWeight: {
-        light: 320,
+        light: 350,
         normal: 415,
       },
       letterSpacing: {
@@ -32,10 +43,11 @@ module.exports = {
           css: {
             color: theme("colors.gray.500"),
             fontWeight: "inherit",
+            fontSmooth: "5em",
             letterSpacing: theme("letterSpacing.normal"),
             fontSize: theme("fontSize.base"),
             "h2,h3": {
-              color: theme("colors.gray.900"),
+              color: theme("colors.gray.800"),
               fontWeight: "inherit",
             },
             h2: {
@@ -51,25 +63,25 @@ module.exports = {
             },
             a: {
               display: "inline",
-              color: theme("colors.gray.900"),
+              color: theme("colors.gray.800"),
               fontWeight: "inherit",
               textDecoration: "none",
               borderBottomWidth: 1,
               borderBottomColor: "transparent",
               "&:hover": {
-                borderBottomColor: theme("colors.gray.900"),
+                borderBottomColor: theme("colors.gray.800"),
               },
             },
           },
         },
         dark: {
           css: {
-            color: theme("colors.gray.400"),
+            color: theme("colors.gray.300"),
             fontWeight: "inherit",
             letterSpacing: theme("letterSpacing.normal"),
             fontSize: theme("fontSize.base"),
             "h2,h3": {
-              color: theme("colors.gray.50"),
+              color: theme("colors.gray.100"),
               fontWeight: "inherit",
             },
             h2: {
@@ -85,13 +97,13 @@ module.exports = {
             },
             a: {
               display: "inline",
-              color: theme("colors.gray.50"),
+              color: theme("colors.gray.100"),
               fontWeight: "inherit",
               textDecoration: "none",
               borderBottomWidth: 1,
               borderBottomColor: "transparent",
               "&:hover": {
-                borderBottomColor: theme("colors.gray.50"),
+                borderBottomColor: theme("colors.gray.100"),
               },
             },
           },
