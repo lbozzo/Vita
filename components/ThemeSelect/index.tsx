@@ -17,9 +17,14 @@ const ThemeSelect = () => {
       key: "Light",
       label: "Light",
       value: "light",
-      icon: <SunIcon />,
+      icon: <SunIcon className="text-yellow-500" />,
     },
-    { key: "Dark", label: "Dark", value: "dark", icon: <MoonIcon /> },
+    {
+      key: "Dark",
+      label: "Dark",
+      value: "dark",
+      icon: <MoonIcon className="text-blue-400" />,
+    },
   ];
 
   const onChange = (e: any) => {

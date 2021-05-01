@@ -18,7 +18,8 @@ export default function Home() {
               height={120}
               objectFit="cover"
               quality={100}
-              loading="lazy"
+              loading="eager"
+              alt="Lucas Bozzo - Web Developer"
             />
           </div>
           <div className="flex items-center justify-center absolute bottom-0 right-0 w-7 h-7 rounded-full shadow-sm border bg-white dark:bg-gray-500 border-gray-200 dark:border-gray-600">
@@ -39,13 +40,13 @@ export default function Home() {
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="inline text-green-500 pr-1"
+              className="inline text-green-700 pr-1"
             >
               <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
               <circle cx="12" cy="12" r="9"></circle>
               <path d="M9 12l2 2l4 -4"></path>
             </svg>
-            <span className="text-green-500 dark:text-green-500 underline">
+            <span className="text-green-700 dark:text-green-500">
               Available for work.
             </span>
           </div>
