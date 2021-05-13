@@ -1,9 +1,9 @@
+/** @jsxImportSource theme-ui */
 import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons";
 import { useColorMode } from "@theme-ui/color-modes";
-import { Text } from "@theme-ui/components";
+import { Box } from "@theme-ui/components";
 import { useTheme } from "next-themes";
-import { cloneElement, useEffect, useState } from "react";
-
+import { useEffect, useState } from "react";
 import Selector from "../Selector";
 
 const ThemeSelect = () => {
@@ -44,16 +44,21 @@ const ThemeSelect = () => {
   if (!mounted) return null;
 
   return (
-    <Selector options={options} value={theme} onChange={onChange}>
-      <Text sx={{ width: 20 }} paddingTop={2}>
-        {cloneElement(options.find((el) => el.value === theme).icon, {
-          size: 18,
+    <Box>
+      <Selector
+        defaultValue={theme}
+        onChange={onChange}
+        left={options.find((el) => el.value === theme).icon}
+      >
+        {options.map(({ key, label, value }) => {
+          return (
+            <option key={key} value={value}>
+              {label}
+            </option>
+          );
         })}
-      </Text>
-      <Text marginLeft={2}>
-        {options.find((el) => el.value === theme).label}
-      </Text>
-    </Selector>
+      </Selector>
+    </Box>
   );
 };
 

@@ -1,10 +1,10 @@
 /** @jsxImportSource theme-ui */
 import { IconSelector } from "@tabler/icons";
-import { Box, Flex } from "@theme-ui/components";
+import { Flex } from "@theme-ui/components";
 import {
+  cloneElement,
   DetailedHTMLProps,
   FC,
-  OptionHTMLAttributes,
   SelectHTMLAttributes,
 } from "react";
 
@@ -16,81 +16,58 @@ export interface SelectorProps
     >,
     "defaultValue" | "value" | "onChange"
   > {
-  options: Array<
-    Pick<
-      DetailedHTMLProps<
-        OptionHTMLAttributes<HTMLOptionElement>,
-        HTMLOptionElement
-      >,
-      "key" | "value" | "label"
-    >
-  >;
+  left?: React.ReactElement;
 }
 
 const Selector: FC<SelectorProps> = ({
   children,
-  options,
   value,
   defaultValue,
+  left,
   onChange,
 }) => (
-  <Box
+  <Flex
     sx={{
       position: "relative",
       "&:hover": { color: "heading" },
     }}
   >
+    <Flex sx={{ marginRight: "-28px", alignSelf: "center" }}>
+      {cloneElement(left, {
+        size: 18,
+        stroke: 1.5,
+      })}
+    </Flex>
     <select
       sx={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        height: "100%",
         width: "100%",
-        opacity: 0,
         cursor: "pointer",
+        backgroundColor: "transparent",
+        WebkitAppearance: "none",
+        paddingRight: 4,
+        paddingLeft: left ? 4 : 2,
+        paddingY: 2,
+        borderRadius: 4,
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        color: "text",
+        "&:hover": {
+          color: "heading",
+        },
       }}
       id="filter-select"
       value={value}
       defaultValue={defaultValue}
       onChange={onChange}
     >
-      {options.map((option) => (
-        <option key={option.key} value={option.value}>
-          {option.label}
-        </option>
-      ))}
+      {children}
     </select>
-    <Flex
-      sx={{
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        borderRadius: 6,
-        borderWidth: 1,
-        borderStyle: "solid",
-      }}
-      paddingY="2px"
-      paddingLeft="12px"
-      paddingRight="8px"
-    >
-      <label
-        sx={{
-          display: "flex",
-          flex: 1,
-          flexDirection: "row",
-          alignItems: "center",
-          overflow: "hidden",
-          whiteSpace: "nowrap",
-          textOverflow: "ellipsis",
-        }}
-        htmlFor="filter-select"
-      >
-        {children}
-      </label>
-      <IconSelector sx={{ marginLeft: 3 }} stroke={1.5} size={18} />
-    </Flex>
-  </Box>
+    <IconSelector
+      sx={{ alignSelf: "center", marginLeft: "-24px", pointerEvents: "none" }}
+      stroke={1.5}
+      size={14}
+    />
+  </Flex>
 );
 
 export default Selector;

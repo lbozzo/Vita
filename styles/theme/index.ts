@@ -80,4 +80,16 @@ export default {
       },
     },
   },
+  forms: {
+    select: {
+      minWidth: "max-content",
+      paddingRight: 4,
+      overflow: "hidden",
+      textOverflow: "ellipsis",
+      color: "text",
+      "&:hover": {
+        color: "heading",
+      },
+    },
+  },
 };
