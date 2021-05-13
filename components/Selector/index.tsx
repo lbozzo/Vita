@@ -34,7 +34,7 @@ const Selector: FC<SelectorProps> = ({
   >
     <Flex sx={{ marginRight: "-28px", alignSelf: "center" }}>
       {cloneElement(left, {
-        size: 18,
+        size: 16,
         stroke: 1.5,
       })}
     </Flex>
