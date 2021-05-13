@@ -1,10 +1,12 @@
+/** @jsxImportSource theme-ui */
+import { IconSelector } from "@tabler/icons";
+import { Flex } from "@theme-ui/components";
 import {
+  cloneElement,
   DetailedHTMLProps,
   FC,
-  OptionHTMLAttributes,
   SelectHTMLAttributes,
 } from "react";
-import { SelectorIcon } from "../Icons";
 
 export interface SelectorProps
   extends Pick<
@@ -14,45 +16,58 @@ export interface SelectorProps
     >,
     "defaultValue" | "value" | "onChange"
   > {
-  options: Array<
-    Pick<
-      DetailedHTMLProps<
-        OptionHTMLAttributes<HTMLOptionElement>,
-        HTMLOptionElement
-      >,
-      "key" | "value" | "label"
-    >
-  >;
+  left?: React.ReactElement;
 }
 
 const Selector: FC<SelectorProps> = ({
   children,
-  options,
   value,
   defaultValue,
+  left,
   onChange,
 }) => (
-  <div className="relative text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 group">
+  <Flex
+    sx={{
+      position: "relative",
+      "&:hover": { color: "heading" },
+    }}
+  >
+    <Flex sx={{ marginRight: "-28px", alignSelf: "center" }}>
+      {cloneElement(left, {
+        size: 16,
+        stroke: 1.5,
+      })}
+    </Flex>
     <select
-      className="absolute top-0 left-0 h-full w-full opacity-0 cursor-pointer text-[16px]"
+      sx={{
+        width: "100%",
+        cursor: "pointer",
+        backgroundColor: "transparent",
+        WebkitAppearance: "none",
+        paddingRight: 4,
+        paddingLeft: left ? 4 : 2,
+        paddingY: 2,
+        borderRadius: 4,
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        color: "text",
+        "&:hover": {
+          color: "heading",
+        },
+      }}
       id="filter-select"
       value={value}
       defaultValue={defaultValue}
       onChange={onChange}
     >
-      {options.map((option) => (
-        <option key={option.key} value={option.value}>
-          {option.label}
-        </option>
-      ))}
+      {children}
     </select>
-    <div className="flex items-center py-1 pl-3 pr-2 rounded-md border border-gray-200 group-hover:border-gray-500 dark:border-gray-500 dark:group-hover:border-gray-300">
-      <label className="flex-1" htmlFor="filter-select">
-        {children}
-      </label>
-      <SelectorIcon size={24} />
-    </div>
-  </div>
+    <IconSelector
+      sx={{ alignSelf: "center", marginLeft: "-24px", pointerEvents: "none" }}
+      stroke={1.5}
+      size={14}
+    />
+  </Flex>
 );
 
 export default Selector;

@@ -1,29 +1,34 @@
+/** @jsxImportSource theme-ui */
+import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons";
+import { useColorMode } from "@theme-ui/color-modes";
+import { Box } from "@theme-ui/components";
 import { useTheme } from "next-themes";
-import { cloneElement, ReactNode, useEffect, useMemo, useState } from "react";
-import { DeviceDesktopIcon, MoonIcon, SunIcon } from "../Icons";
+import { useEffect, useState } from "react";
 import Selector from "../Selector";
 
 const ThemeSelect = () => {
   const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  const [colorMode, setColorMode] = useColorMode();
+
   const options = [
     {
       key: "System",
       label: "System",
       value: "system",
-      icon: <DeviceDesktopIcon />,
+      icon: <IconDeviceDesktop />,
     },
     {
       key: "Light",
       label: "Light",
       value: "light",
-      icon: <SunIcon className="text-yellow-500" />,
+      icon: <IconSun />,
     },
     {
       key: "Dark",
       label: "Dark",
       value: "dark",
-      icon: <MoonIcon className="text-blue-400" />,
+      icon: <IconMoon />,
     },
   ];
 
@@ -31,23 +36,29 @@ const ThemeSelect = () => {
     setTheme(e.currentTarget.value);
   };
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    setColorMode(resolvedTheme);
+  }, [resolvedTheme]);
 
   if (!mounted) return null;
 
   return (
-    <Selector options={options} value={theme} onChange={onChange}>
-      <span className="flex flex-row items-center">
-        <span className="w-5">
-          {cloneElement(options.find((el) => el.value === theme).icon, {
-            size: 18,
-          })}
-        </span>
-        <span className="ml-2 font-normal text-gray-900 dark:text-gray-300">
-          {options.find((el) => el.value === theme).label}
-        </span>
-      </span>
-    </Selector>
+    <Box>
+      <Selector
+        defaultValue={theme}
+        onChange={onChange}
+        left={options.find((el) => el.value === theme).icon}
+      >
+        {options.map(({ key, label, value }) => {
+          return (
+            <option key={key} value={value}>
+              {label}
+            </option>
+          );
+        })}
+      </Selector>
+    </Box>
   );
 };
 

@@ -1,3 +1,4 @@
+import { InitializeColorMode } from "@theme-ui/color-modes";
 import Document, {
   DocumentContext,
   Head,
@@ -18,20 +19,14 @@ class MyDocument extends Document {
         <Head>
           <link
             rel="preload"
-            href="/fonts/Inter-Light.woff2"
+            href="/fonts/Karla-VariableFont_wght.ttf"
             as="font"
-            type="font/woff2"
-            crossOrigin="anonymous"
-          />
-          <link
-            rel="preload"
-            href="/fonts/Inter-Light.woff"
-            as="font"
-            type="font/woff"
+            type="font/ttf"
             crossOrigin="anonymous"
           />
         </Head>
-        <body className="bg-white dark:bg-gray-900">
+        <body>
+          <InitializeColorMode />
           <Main />
           <NextScript />
         </body>

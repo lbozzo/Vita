@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { NextSeo } from "next-seo";
+import { Box } from "@theme-ui/components";
 
 const Container: FC = ({ children }) => {
   return (
@@ -21,11 +22,11 @@ const Container: FC = ({ children }) => {
           cardType: "summary",
         }}
       />
-      <div className="py-12 md:py-[72px] px-8">
-        <div className="prose dark:prose-dark mx-auto max-w-prose">
+      <Box paddingY={48} paddingX={32} className="py-12 md:py-[72px] px-8">
+        <Box sx={{ maxWidth: "67ch" }} marginX="auto">
           {children}
-        </div>
-      </div>
+        </Box>
+      </Box>
     </>
   );
 };
