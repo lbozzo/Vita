@@ -1,10 +1,12 @@
+/** @jsxImportSource theme-ui */
+import { IconSelector } from "@tabler/icons";
+import { Box, Flex } from "@theme-ui/components";
 import {
   DetailedHTMLProps,
   FC,
   OptionHTMLAttributes,
   SelectHTMLAttributes,
 } from "react";
-import { SelectorIcon } from "../Icons";
 
 export interface SelectorProps
   extends Pick<
@@ -32,9 +34,22 @@ const Selector: FC<SelectorProps> = ({
   defaultValue,
   onChange,
 }) => (
-  <div className="relative text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-300 group">
+  <Box
+    sx={{
+      position: "relative",
+      "&:hover": { color: "heading" },
+    }}
+  >
     <select
-      className="absolute top-0 left-0 h-full w-full opacity-0 cursor-pointer text-[16px]"
+      sx={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        height: "100%",
+        width: "100%",
+        opacity: 0,
+        cursor: "pointer",
+      }}
       id="filter-select"
       value={value}
       defaultValue={defaultValue}
@@ -46,13 +61,36 @@ const Selector: FC<SelectorProps> = ({
         </option>
       ))}
     </select>
-    <div className="flex items-center py-1 pl-3 pr-2 rounded-md border border-gray-200 group-hover:border-gray-500 dark:border-gray-500 dark:group-hover:border-gray-300">
-      <label className="flex-1" htmlFor="filter-select">
+    <Flex
+      sx={{
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        borderRadius: 6,
+        borderWidth: 1,
+        borderStyle: "solid",
+      }}
+      paddingY="2px"
+      paddingLeft="12px"
+      paddingRight="8px"
+    >
+      <label
+        sx={{
+          display: "flex",
+          flex: 1,
+          flexDirection: "row",
+          alignItems: "center",
+          overflow: "hidden",
+          whiteSpace: "nowrap",
+          textOverflow: "ellipsis",
+        }}
+        htmlFor="filter-select"
+      >
         {children}
       </label>
-      <SelectorIcon size={24} />
-    </div>
-  </div>
+      <IconSelector sx={{ marginLeft: 3 }} stroke={1.5} size={18} />
+    </Flex>
+  </Box>
 );
 
 export default Selector;

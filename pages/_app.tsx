@@ -1,12 +1,16 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider as NextThemeProvider } from "next-themes";
+import { ThemeProvider } from "theme-ui";
+import theme from "../styles/theme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="light">
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <NextThemeProvider defaultTheme="light">
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </NextThemeProvider>
   );
 }
 

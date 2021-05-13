@@ -1,4 +1,7 @@
+/** @jsxImportSource theme-ui */
+import { Box, Flex, Text } from "@theme-ui/components";
 import { FC, ReactNode } from "react";
+import Link from "../Link";
 
 type ItemProps = {
   left: ReactNode | string;
@@ -8,17 +11,20 @@ type ItemProps = {
 
 const Item: FC<ItemProps> = ({ left, title, detail }) => {
   return (
-    <div className="flex flex-col md:flex-row ml-4 md:ml-0">
-      <div className="w-[15ch] mr-9 text-gray-400 dark:text-gray-300">
+    <Flex
+      sx={{ flexDirection: ["column", "column", "row"], flex: 1 }}
+      marginLeft={[16, 16, 0]}
+    >
+      <Box sx={{ width: "15ch" }} marginRight={36}>
         {left}
-      </div>
-      <div className="w-full">
-        <div className="font-normal text-gray-900 dark:text-gray-100">
-          {title}
-        </div>
+      </Box>
+      <div sx={{ width: "100%" }}>
+        <Link>
+          <Text variant="heading">{title}</Text>
+        </Link>
         {detail && <div>{detail}</div>}
       </div>
-    </div>
+    </Flex>
   );
 };
 

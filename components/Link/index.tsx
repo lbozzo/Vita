@@ -1,5 +1,7 @@
+/** @jsxImportSource theme-ui */
 import { FC } from "react";
-import { ArrowUpRightIcon } from "../Icons";
+import { Link as TLink } from "theme-ui";
+import { IconArrowUpRight } from "@tabler/icons";
 
 type LinkProps = {
   src?: string;
@@ -7,20 +9,11 @@ type LinkProps = {
 
 const Link: FC<LinkProps> = ({ src, children }) => {
   return src ? (
-    <div className="block whitespace-nowrap">
-      <a
-        href={src}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline"
-      >
+    <div sx={{ whiteSpace: "nowrap" }}>
+      <TLink href={src} target="_blank" rel="noopener noreferrer">
         {children}
-      </a>
-      <ArrowUpRightIcon
-        size={12}
-        strokeWidth={1.5}
-        className="inline ml-[2px] mb-[2px]"
-      />
+      </TLink>
+      <IconArrowUpRight size={12} strokeWidth={1.5} />
     </div>
   ) : (
     <>{children}</>
