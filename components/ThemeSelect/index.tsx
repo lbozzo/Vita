@@ -1,7 +1,6 @@
 /** @jsxImportSource theme-ui */
 import { IconDeviceDesktop, IconMoon, IconSun } from "@tabler/icons";
 import { useColorMode } from "@theme-ui/color-modes";
-import { Box } from "@theme-ui/components";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import Selector from "../Selector";
@@ -44,22 +43,20 @@ const ThemeSelect = () => {
   if (!mounted) return null;
 
   return (
-    <Box>
-      <Selector
-        defaultValue={theme}
-        onChange={onChange}
-        left={options.find((el) => el.value === theme).icon}
-        label={options.find((el) => el.value === theme).label}
-      >
-        {options.map(({ key, label, value }) => {
-          return (
-            <option key={key} value={value}>
-              {label}
-            </option>
-          );
-        })}
-      </Selector>
-    </Box>
+    <Selector
+      defaultValue={theme}
+      onChange={onChange}
+      left={options.find((el) => el.value === theme).icon}
+      label={options.find((el) => el.value === theme).label}
+    >
+      {options.map(({ key, label, value }) => {
+        return (
+          <option key={key} value={value}>
+            {label}
+          </option>
+        );
+      })}
+    </Selector>
   );
 };
 

@@ -31,6 +31,7 @@ const Selector: FC<SelectorProps> = ({
   <Flex
     sx={{
       position: "relative",
+      width: "100%",
       borderWidth: 1,
       borderStyle: "solid",
       borderColor: "text",
