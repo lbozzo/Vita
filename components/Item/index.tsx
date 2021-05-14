@@ -1,4 +1,5 @@
 /** @jsxImportSource theme-ui */
+import React from "react";
 import { Box, Flex, Text } from "@theme-ui/components";
 import { FC, ReactNode } from "react";
 import Link from "../Link";
@@ -29,3 +30,23 @@ const Item: FC<ItemProps> = ({ left, title, detail }) => {
 };
 
 export default Item;
+
+export const ItemList: FC<{ space?: number }> = ({ children, space }) => {
+  if (React.Children.count(children)) {
+    return (
+      <>
+        {React.Children.map(children, (child) => (
+          <Box
+            sx={{
+              marginY: space || 64,
+              "&:first-of-type": { marginY: 0, paddingTop: 24, width: "100%" },
+            }}
+          >
+            {child}
+          </Box>
+        ))}
+      </>
+    );
+  }
+  return null;
+};
