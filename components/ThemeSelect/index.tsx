@@ -49,6 +49,7 @@ const ThemeSelect = () => {
         defaultValue={theme}
         onChange={onChange}
         left={options.find((el) => el.value === theme).icon}
+        label={options.find((el) => el.value === theme).label}
       >
         {options.map(({ key, label, value }) => {
           return (

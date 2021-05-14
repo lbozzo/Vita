@@ -17,6 +17,7 @@ export interface SelectorProps
     "defaultValue" | "value" | "onChange"
   > {
   left?: React.ReactElement;
+  label: React.ReactElement | string;
 }
 
 const Selector: FC<SelectorProps> = ({
@@ -24,36 +25,64 @@ const Selector: FC<SelectorProps> = ({
   value,
   defaultValue,
   left,
+  label,
   onChange,
 }) => (
   <Flex
     sx={{
       position: "relative",
-      "&:hover": { color: "heading" },
+      borderWidth: 1,
+      borderStyle: "solid",
+      borderColor: "text",
+      borderRadius: 4,
+      color: "text",
+      "&:hover": {
+        borderColor: "heading",
+        color: "heading",
+      },
     }}
   >
-    <Flex sx={{ marginRight: "-28px", alignSelf: "center" }}>
-      {cloneElement(left, {
-        size: 16,
-        stroke: 1.5,
-      })}
+    <Flex
+      sx={{
+        flexDirection: "row",
+        alignItems: "center",
+        width: "100%",
+        height: "100%",
+        paddingX: 2,
+        paddingY: 1,
+      }}
+    >
+      <Flex paddingRight={2} marginBottom={0.5}>
+        {cloneElement(left, {
+          size: 14,
+          stroke: 1.5,
+        })}
+      </Flex>
+      <label
+        htmlFor="filter-select"
+        sx={{
+          flex: 1,
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+          fontSize: 12,
+        }}
+      >
+        {label}
+      </label>
+      <Flex paddingLeft={2} marginBottom={0.5}>
+        <IconSelector stroke={1.5} size={14} />
+      </Flex>
     </Flex>
     <select
       sx={{
+        position: "absolute",
         width: "100%",
-        cursor: "pointer",
-        backgroundColor: "transparent",
+        height: "100%",
         WebkitAppearance: "none",
-        paddingRight: 4,
-        paddingLeft: left ? 4 : 2,
-        paddingY: 2,
-        borderRadius: 4,
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        color: "text",
-        "&:hover": {
-          color: "heading",
-        },
+        fontSize: 16,
+        opacity: 0,
+        cursor: "pointer",
       }}
       id="filter-select"
       value={value}
@@ -62,11 +91,6 @@ const Selector: FC<SelectorProps> = ({
     >
       {children}
     </select>
-    <IconSelector
-      sx={{ alignSelf: "center", marginLeft: "-24px", pointerEvents: "none" }}
-      stroke={1.5}
-      size={14}
-    />
   </Flex>
 );
 
