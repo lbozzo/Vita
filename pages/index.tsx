@@ -2,10 +2,11 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import Link from "../components/Link";
-import Item from "../components/Item";
+import Item, { ItemList } from "../components/Item";
 import Container from "../components/Container";
 import { Box, Flex, Heading, Paragraph, Text } from "@theme-ui/components";
 import PlayingNow from "../components/PlayingNow";
+import Section from "../components/Section";
 
 const ThemeSelect = dynamic(() => import("../components/ThemeSelect"));
 
@@ -77,89 +78,82 @@ export default function Home() {
           </Box>
         </Box>
       </Flex>
-
-      <section sx={{ marginY: 36 }}>
+      <Section>
         <Heading as="h3">About</Heading>
         <Paragraph marginLeft={[16, 16, 0]}>
           I&apos;m a full-stack developer and aspiring UI Designer focused on
           Web technologies and hybrid mobile apps. I'm based in London, United
           Kingdom. I consider myself as a traveler and coffee addict.{" "}
         </Paragraph>
-      </section>
-      <section sx={{ marginY: 64 }}>
+      </Section>
+      <Section>
         <Heading as="h3">Side Projects</Heading>
-        <Box paddingTop={24} sx={{ width: "100%" }}>
+        <ItemList>
           <Item
             left="2021 - Now"
             title={<Link src="https://cuspide.vercel.app">Cuspide</Link>}
             detail="Positive mindset. Motivational quotes to reach your true potential. Inspired by Maslow's hierarchy of needs."
           />
-        </Box>
-        <Box marginY={36}>
           <Item
             left="2021 - Now"
             title="Inara Labs"
             detail="High quality and performant websites for entrepreneurs and small businesses."
           />
-        </Box>
-      </section>
-      <section sx={{ marginY: 64 }}>
+        </ItemList>
+      </Section>
+      <Section>
         <Heading as="h3">Work Experience</Heading>
-        <Box paddingTop={24} sx={{ width: "100%" }}>
+        <ItemList>
           <Item
             left="2020 - 2020"
             title="Web Developer at Maddot Studio"
             detail="Remote"
           />
-        </Box>
-        <Box marginY={36}>
+
           <Item
             left="2017 — 2019"
             title="Business Systems Analyst at Copa Airlines"
             detail="Panama"
           />
-        </Box>
-        <Box marginY={36}>
+
           <Item
             left="2018 — 2019"
             title={<Link>Software Developer at Clariti Chile</Link>}
             detail="Remote"
           />
-        </Box>
-        <Box marginY={36}>
+
           <Item
             left="2014 — 2016"
             title={<Link>Software Developer at Atesis S.A.</Link>}
             detail="Panama"
           />
-        </Box>
-      </section>
-      <section sx={{ marginY: 64 }}>
+        </ItemList>
+      </Section>
+      <Section>
         <Heading as="h3">Education</Heading>
-        <Box paddingTop={24} sx={{ width: "100%" }}>
+        <ItemList>
           <Item
             left="2020 — 2021"
             title="MSc. International Business Management at Newcastle University"
             detail="United Kingdom"
           />
-        </Box>
-        <Box marginY={36}>
+
           <Item
             left="2012 — 2016"
             title="BA. Telematic systems Engineering at Universidad Católica Santa María la Antigua"
             detail="Panama"
           />
-        </Box>
-      </section>
-      <section sx={{ marginY: 64 }}>
+        </ItemList>
+      </Section>
+      <Section>
         <Heading as="h3">Volunteering</Heading>
-        <div sx={{ paddingTop: 24 }}>
+        <ItemList>
           <Item left="2015" title="Fundación Caminos de Luz" detail="Panama" />
-        </div>
-      </section>
-      <section sx={{ marginY: 64 }}>
+        </ItemList>
+      </Section>
+      <Section>
         <Heading as="h3">Contact</Heading>
-        <Box paddingTop={24} sx={{ width: "100%" }}>
+        <ItemList space={16}>
           <Item
             left="Email"
             title={
@@ -168,47 +162,39 @@ export default function Home() {
               </Link>
             }
           />
-        </Box>
-        <Box marginY={16}>
           <Item
             left="Github"
             title={<Link src="https://github.com/lbozzo">lbozzo</Link>}
           />
-        </Box>
-        <Box marginY={16}>
           <Item
             left="Twitter"
             title={<Link src="https://twitter.com/ljbozzo">ljbozzo</Link>}
           />
-        </Box>
-        <Box marginY={16}>
           <Item
             left="Instagram"
             title={
               <Link src="https://instagram.com/lucasbozzo">lucasbozzo</Link>
             }
           />
-        </Box>
-      </section>
-      <section sx={{ marginY: 64 }}>
+        </ItemList>
+      </Section>
+      <Section>
         <Flex
           sx={{
-            flexDirection: ["column-reverse", "row"],
-            alignItems: ["flex-start", "center"],
+            flex: 1,
+            flexDirection: ["column", "row"],
+            alignItems: "flex-start",
             justifyContent: "space-between",
-            width: "100%",
           }}
         >
-          <Box marginRight={16} marginY={16}>
-            <Box>
-              <PlayingNow />
-            </Box>
-          </Box>
-          <div sx={{ width: "130px" }}>
+          <Flex sx={{ flex: 1 }} marginRight={4} marginY={3} paddingTop={1}>
+            <PlayingNow />
+          </Flex>
+          <Flex sx={{ width: 130 }} marginY={3}>
             <ThemeSelect />
-          </div>
+          </Flex>
         </Flex>
-      </section>
+      </Section>
     </Container>
   );
 }
