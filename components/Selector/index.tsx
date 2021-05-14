@@ -52,9 +52,9 @@ const Selector: FC<SelectorProps> = ({
         paddingY: 1,
       }}
     >
-      <Flex paddingRight={2} marginBottom={0.5}>
+      <Flex paddingRight={2}>
         {cloneElement(left, {
-          size: 14,
+          size: 16,
           stroke: 1.5,
         })}
       </Flex>
@@ -65,12 +65,11 @@ const Selector: FC<SelectorProps> = ({
           overflow: "hidden",
           textOverflow: "ellipsis",
           whiteSpace: "nowrap",
-          fontSize: 12,
         }}
       >
         {label}
       </label>
-      <Flex paddingLeft={2} marginBottom={0.5}>
+      <Flex paddingLeft={2}>
         <IconSelector stroke={1.5} size={14} />
       </Flex>
     </Flex>
