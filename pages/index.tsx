@@ -67,6 +67,7 @@ export default function Home() {
               alignItems: "center",
               borderRadius: 4,
               lineHeight: 1.5,
+              fontWeight: "heading",
             }}
             marginTop={1}
             paddingX={2}

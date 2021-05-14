@@ -9,10 +9,10 @@ const PlayingNow = (): JSX.Element => {
 
   return (
     <Flex sx={{ alignItems: "flex-start" }}>
-      <Box paddingTop="3px">
+      <Flex paddingTop="3px">
         <IconHeadphones stroke={1.5} size={18} />
-      </Box>
-      <Box marginLeft={2}>
+      </Flex>
+      <Flex marginLeft={2} sx={{ flex: 1 }}>
         {data && data.title ? (
           <Link src={data.songUrl}>
             Listening to <Text variant="heading">{data?.title}</Text> by{" "}
@@ -21,7 +21,7 @@ const PlayingNow = (): JSX.Element => {
         ) : (
           <Text>Nothing playing right now.</Text>
         )}
-      </Box>
+      </Flex>
     </Flex>
   );
 };
