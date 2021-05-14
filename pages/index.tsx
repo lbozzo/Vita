@@ -5,6 +5,7 @@ import Link from "../components/Link";
 import Item from "../components/Item";
 import Container from "../components/Container";
 import { Box, Flex, Heading, Paragraph, Text } from "@theme-ui/components";
+import PlayingNow from "../components/PlayingNow";
 
 const ThemeSelect = dynamic(() => import("../components/ThemeSelect"));
 
@@ -199,14 +200,9 @@ export default function Home() {
           }}
         >
           <Box marginRight={16} marginY={16}>
-            {process.env.NEXT_PUBLIC_LAST_UPDATED && (
-              <Text>
-                Last updated{" "}
-                {new Date(
-                  process.env.NEXT_PUBLIC_LAST_UPDATED
-                ).toLocaleDateString()}
-              </Text>
-            )}
+            <Box>
+              <PlayingNow />
+            </Box>
           </Box>
           <div sx={{ width: "130px" }}>
             <ThemeSelect />
