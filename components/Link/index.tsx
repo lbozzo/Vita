@@ -2,21 +2,16 @@
 import { cloneElement, FC, useEffect, useState } from "react";
 import { Box, Link as TLink } from "theme-ui";
 import { IconArrowUpRight, IconLink } from "@tabler/icons";
-import NLink from "next/link";
+import NLink, { LinkProps as NLinkProps } from "next/link";
 
-type LinkProps = {
-  src?: string;
-};
+const Link: FC<Pick<NLinkProps, "href">> = ({ href, children }) => {
+  const [isExternal, setExternal] = useState<boolean>(
+    !href.toString().startsWith("/")
+  );
 
-const Link: FC<LinkProps> = ({ src, children }) => {
-  const [isExternal, setExternal] = useState<boolean>(false);
-  useEffect(() => {
-    setExternal(!new RegExp(window.location.host).test(src));
-  }, []);
-
-  return src ? (
-    <Box sx={{ display: "inline-block" }}>
-      <NLink href={src} passHref>
+  return (
+    <Box>
+      <NLink href={href} passHref>
         <TLink
           rel="noopener noreferrer"
           {...(isExternal && { target: "_blank" })}
@@ -24,15 +19,12 @@ const Link: FC<LinkProps> = ({ src, children }) => {
           {children}
         </TLink>
       </NLink>
-      <span sx={{ marginLeft: "2px" }}>
-        {cloneElement(isExternal ? <IconArrowUpRight /> : <IconLink />, {
-          size: 12,
-          stroke: 1.5,
-        })}
-      </span>
+      {isExternal && (
+        <span sx={{ marginLeft: "2px" }}>
+          <IconArrowUpRight size={12} stroke={1.5} />
+        </span>
+      )}
     </Box>
-  ) : (
-    <>{children}</>
   );
 };
 

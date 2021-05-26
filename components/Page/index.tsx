@@ -1,8 +1,9 @@
 import { FC } from "react";
 import { NextSeo } from "next-seo";
-import { Box } from "@theme-ui/components";
+import { Box, Container } from "@theme-ui/components";
+import Footer from "../Footer";
 
-const Container: FC = ({ children }) => {
+const Page: FC = ({ children }) => {
   return (
     <>
       <NextSeo
@@ -22,13 +23,12 @@ const Container: FC = ({ children }) => {
           cardType: "summary",
         }}
       />
-      <Box paddingY={48} paddingX={32} className="py-12 md:py-[72px] px-8">
-        <Box sx={{ maxWidth: "67ch" }} marginX="auto">
-          {children}
-        </Box>
-      </Box>
+      <Container paddingY={48}>
+        <Box as="main">{children}</Box>
+        <Footer />
+      </Container>
     </>
   );
 };
 
-export default Container;
+export default Page;

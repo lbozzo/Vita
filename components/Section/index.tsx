@@ -1,11 +1,16 @@
-/** @jsxImportSource theme-ui */
-
+import { Box, BoxProps } from "@theme-ui/components";
 import { FC } from "react";
 
-const Section: FC = ({ children }) => (
-  <section sx={{ marginY: 64, "&:first-of-type": { marginY: 36 } }}>
+interface SectionProps extends BoxProps {}
+
+const Section: FC<SectionProps> = ({ children, ...props }) => (
+  <Box
+    as="section"
+    sx={{ marginY: 64, "&:first-of-type": { marginY: 36 } }}
+    {...props}
+  >
     {children}
-  </section>
+  </Box>
 );
 
 export default Section;
