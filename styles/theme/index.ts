@@ -27,6 +27,9 @@ export default {
     useColorSchemeMediaQuery: false,
   },
   breakpoints: ["640px", "768px", "1024px", "1280px", "1536px"],
+  sizes: {
+    container: "67ch",
+  },
   fonts: {
     body: '"Karla", system-ui, sans-serif',
     heading: '"Karla", sans-serif',
@@ -53,12 +56,33 @@ export default {
       },
     },
   },
+  layout: {
+    container: {
+      paddingX: 4,
+    },
+  },
   text: {
     heading: {
       fontFamily: "heading",
       fontWeight: "heading",
       fontSize: "inherit",
       color: "heading",
+    },
+  },
+  buttons: {
+    icon: {
+      borderWidth: 1,
+      borderColor: "text",
+      borderStyle: "solid",
+      borderRadius: 4,
+      opacity: 0.9,
+      "&:hover": {
+        opacity: 1,
+        borderColor: "heading",
+      },
+      "&:disabled": {
+        opacity: 0.4,
+      },
     },
   },
   styles: {

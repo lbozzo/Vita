@@ -1,18 +1,84 @@
 /** @jsxImportSource theme-ui */
 import Image from "next/image";
-import dynamic from "next/dynamic";
 import Link from "../components/Link";
 import Item, { ItemList } from "../components/Item";
-import Container from "../components/Container";
+import Page from "../components/Page";
 import { Box, Flex, Heading, Paragraph, Text } from "@theme-ui/components";
-import PlayingNow from "../components/PlayingNow";
 import Section from "../components/Section";
+import { getFiles, MDX } from "../lib/mdx";
+import _ from "lodash";
+import { GetStaticProps, NextPage } from "next";
 
-const ThemeSelect = dynamic(() => import("../components/ThemeSelect"));
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      data: {
+        projects: _.orderBy(
+          getFiles("project"),
+          ["data.date", "data.order"],
+          ["desc", "asc"]
+        ),
+        work: _.orderBy(getFiles("work"), ["data.date"], ["asc"]),
+        education: _.orderBy(getFiles("education"), ["data.date"], ["asc"]),
+        volunteering: _.orderBy(
+          getFiles("volunteering"),
+          ["data.date"],
+          ["asc"]
+        ),
+      },
+    },
+  };
+};
 
-export default function Home() {
+interface Project {
+  date: string;
+  name: string;
+  description?: string;
+  href?: string;
+  order?: string;
+}
+
+interface Work {
+  date: string;
+  company: string;
+  position: string;
+  location?: string;
+  href?: string;
+  order?: string;
+}
+
+interface Education {
+  date: string;
+  institution: string;
+  degree: string;
+  location?: string;
+  href?: string;
+  order?: string;
+}
+
+interface Volunteering {
+  date: string;
+  company: string;
+  position?: string;
+  location?: string;
+  href?: string;
+  order?: string;
+}
+
+interface HomeProps {
+  data: {
+    projects: MDX<Project>[];
+    work: MDX<Work>[];
+    education: MDX<Education>[];
+    volunteering: MDX<Volunteering>[];
+  };
+}
+
+const Home: NextPage<HomeProps> = ({
+  data: { projects, work, education, volunteering },
+}) => {
   return (
-    <Container>
+    <Page>
       <Flex sx={{ alignItems: "center" }}>
         <Box sx={{ position: "relative", width: 92, height: 92 }}>
           <Box
@@ -89,113 +155,99 @@ export default function Home() {
       </Section>
       <Section>
         <Heading as="h3">Side Projects</Heading>
-        <ItemList>
-          <Item
-            left="2021 - Now"
-            title={<Link src="https://cuspide.vercel.app">Cuspide</Link>}
-            detail="Positive mindset. Motivational quotes to reach your true potential. Inspired by Maslow's hierarchy of needs."
-          />
-          <Item
-            left="2021 - Now"
-            title="Inara Labs"
-            detail="High quality and performant websites for entrepreneurs and small businesses."
-          />
-        </ItemList>
+        <ItemList<MDX<Project>>
+          data={projects}
+          renderItem={({ data: { date, name, description, href } }, key) => (
+            <Item
+              key={key}
+              left={date}
+              title={name}
+              href={href}
+              detail={description}
+            />
+          )}
+        />
       </Section>
       <Section>
         <Heading as="h3">Work Experience</Heading>
-        <ItemList>
-          <Item
-            left="2020 - 2020"
-            title="Web Developer at Maddot Studio"
-            detail="Remote"
-          />
-
-          <Item
-            left="2017 — 2019"
-            title="Business Systems Analyst at Copa Airlines"
-            detail="Panama"
-          />
-
-          <Item
-            left="2018 — 2019"
-            title={<Link>Software Developer at Clariti Chile</Link>}
-            detail="Remote"
-          />
-
-          <Item
-            left="2014 — 2016"
-            title={<Link>Software Developer at Atesis S.A.</Link>}
-            detail="Panama"
-          />
-        </ItemList>
+        <ItemList<MDX<Work>>
+          data={work}
+          renderItem={(
+            { data: { date, position, company, location } },
+            key
+          ) => (
+            <Item
+              key={key}
+              left={date}
+              title={`${position} at ${company}`}
+              detail={location}
+            />
+          )}
+        />
       </Section>
       <Section>
         <Heading as="h3">Education</Heading>
-        <ItemList>
-          <Item
-            left="2020 — 2021"
-            title="MSc. International Business Management at Newcastle University"
-            detail="United Kingdom"
-          />
-
-          <Item
-            left="2012 — 2016"
-            title="BA. Telematic systems Engineering at Universidad Católica Santa María la Antigua"
-            detail="Panama"
-          />
-        </ItemList>
+        <ItemList<MDX<Education>>
+          data={education}
+          renderItem={(
+            { data: { date, degree, institution, location } },
+            key
+          ) => (
+            <Item
+              key={key}
+              left={date}
+              title={`${degree} at ${institution}`}
+              detail={location}
+            />
+          )}
+        ></ItemList>
       </Section>
       <Section>
         <Heading as="h3">Volunteering</Heading>
-        <ItemList>
-          <Item left="2015" title="Fundación Caminos de Luz" detail="Panama" />
-        </ItemList>
+        <ItemList<MDX<Volunteering>>
+          data={volunteering}
+          renderItem={({ data: { date, company, location } }, key) => (
+            <Item key={key} left={date} title={company} detail={location} />
+          )}
+        />
       </Section>
       <Section>
         <Heading as="h3">Contact</Heading>
-        <ItemList space={16}>
-          <Item
-            left="Email"
-            title={
-              <Link src="mailto:lucas.bozzo@icloud.com">
-                lucas.bozzo@icloud.com
-              </Link>
-            }
-          />
-          <Item
-            left="Github"
-            title={<Link src="https://github.com/lbozzo">lbozzo</Link>}
-          />
-          <Item
-            left="Twitter"
-            title={<Link src="https://twitter.com/ljbozzo">ljbozzo</Link>}
-          />
-          <Item
-            left="Instagram"
-            title={
-              <Link src="https://instagram.com/lucasbozzo">lucasbozzo</Link>
-            }
-          />
-        </ItemList>
+        <ItemList
+          space={16}
+          data={[
+            {
+              label: "Email",
+              href: "mailto:lucas.bozzo@icloud.com",
+              account: "lucas.bozzo@icloud.com",
+            },
+            {
+              label: "Github",
+              href: "https://github.com/lbozzo",
+              account: "lbozzo",
+            },
+            {
+              label: "Twitter",
+              href: "https://twitter.com/ljbozzo",
+              account: "ljbozzo",
+            },
+            {
+              label: "Instagram",
+              href: "https://instagram.com/lucasbozzo",
+              account: "lucasbozzo",
+            },
+          ]}
+          renderItem={({ label, href, account }, key) => (
+            <Item
+              key={key}
+              left={label}
+              title={<Link href={href}>{account}</Link>}
+            />
+          )}
+        />
       </Section>
-      <Section>
-        <Flex
-          sx={{
-            flex: 1,
-            flexDirection: ["column", "row"],
-            alignItems: "flex-start",
-            justifyContent: "space-between",
-          }}
-        >
-          <Flex sx={{ flex: 1 }} marginRight={4} marginY={3} paddingTop={1}>
-            <PlayingNow />
-          </Flex>
-          <Flex sx={{ width: 130 }} marginY={3}>
-            <ThemeSelect />
-          </Flex>
-        </Flex>
-      </Section>
-    </Container>
+    </Page>
   );
-}
+};
+
+export default Home;
