@@ -5,8 +5,78 @@ import Item, { ItemList } from "../components/Item";
 import Page from "../components/Page";
 import { Box, Flex, Heading, Paragraph, Text } from "@theme-ui/components";
 import Section from "../components/Section";
+import { getFiles, MDX } from "../lib/mdx";
+import _ from "lodash";
+import { GetStaticProps, NextPage } from "next";
 
-export default function Home() {
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    props: {
+      data: {
+        projects: _.orderBy(
+          getFiles("project"),
+          ["data.date", "data.order"],
+          ["desc", "asc"]
+        ),
+        work: _.orderBy(getFiles("work"), ["data.date"], ["asc"]),
+        education: _.orderBy(getFiles("education"), ["data.date"], ["asc"]),
+        volunteering: _.orderBy(
+          getFiles("volunteering"),
+          ["data.date"],
+          ["asc"]
+        ),
+      },
+    },
+  };
+};
+
+interface Project {
+  date: string;
+  name: string;
+  description?: string;
+  href?: string;
+  order?: string;
+}
+
+interface Work {
+  date: string;
+  company: string;
+  position: string;
+  location?: string;
+  href?: string;
+  order?: string;
+}
+
+interface Education {
+  date: string;
+  institution: string;
+  degree: string;
+  location?: string;
+  href?: string;
+  order?: string;
+}
+
+interface Volunteering {
+  date: string;
+  company: string;
+  position?: string;
+  location?: string;
+  href?: string;
+  order?: string;
+}
+
+interface HomeProps {
+  data: {
+    projects: MDX<Project>[];
+    work: MDX<Work>[];
+    education: MDX<Education>[];
+    volunteering: MDX<Volunteering>[];
+  };
+}
+
+const Home: NextPage<HomeProps> = ({
+  data: { projects, work, education, volunteering },
+}) => {
   return (
     <Page>
       <Flex sx={{ alignItems: "center" }}>
@@ -85,91 +155,48 @@ export default function Home() {
       </Section>
       <Section>
         <Heading as="h3">Side Projects</Heading>
-        <ItemList
-          data={[
-            {
-              period: "2021 - Now",
-              title: "Contorda",
-              detail:
-                "Contactless Orderning Software for small to medium business in Latam.",
-            },
-            {
-              period: "2021 - Now",
-              title: "Inara Labs",
-              detail:
-                "High quality and performant websites for entrepreneurs and small businesses.",
-            },
-            {
-              period: "2021",
-              title: "Cuspide",
-              detail:
-                "Positive mindset. Motivational quotes to reach your true potential. Inspired by Maslow's hierarchy of needs.",
-              href: "https://cuspide.vercel.app",
-            },
-          ]}
-          renderItem={({ period, title, detail, href }, key) => (
+        <ItemList<MDX<Project>>
+          data={projects}
+          renderItem={({ data: { date, name, description, href } }, key) => (
             <Item
               key={key}
-              left={period}
-              title={title}
+              left={date}
+              title={name}
               href={href}
-              detail={detail}
+              detail={description}
             />
           )}
         />
       </Section>
       <Section>
         <Heading as="h3">Work Experience</Heading>
-        <ItemList
-          data={[
-            {
-              period: "2020 - 2020",
-              position: "Web Developer at Maddot Studio",
-              location: "Remote",
-            },
-            {
-              period: "2017 — 2019",
-              position: "Business Systems Analyst at Copa Airlines",
-              location: "Panama",
-            },
-            {
-              period: "2018 — 2019",
-              position: "Software Developer at Clariti Chile",
-              location: "Remote",
-            },
-            {
-              period: "2014 — 2016",
-              position: "Software Developer at Atesis S.A.",
-              location: "Panama",
-            },
-          ]}
-          renderItem={({ period, position, location }, key) => (
-            <Item key={key} left={period} title={position} detail={location} />
+        <ItemList<MDX<Work>>
+          data={work}
+          renderItem={(
+            { data: { date, position, company, location } },
+            key
+          ) => (
+            <Item
+              key={key}
+              left={date}
+              title={`${position} at ${company}`}
+              detail={location}
+            />
           )}
         />
       </Section>
       <Section>
         <Heading as="h3">Education</Heading>
-        <ItemList
-          data={[
-            {
-              period: "2020 — 2021",
-              institution:
-                "MSc. International Business Management at Newcastle University",
-              location: "United Kingdom",
-            },
-            {
-              period: "2012 - 2016",
-              institution:
-                "BA. Telematic systems Engineering at Universidad Católica Santa María la Antigua",
-              location: "Panama",
-            },
-          ]}
-          renderItem={({ period, institution, location }, key) => (
+        <ItemList<MDX<Education>>
+          data={education}
+          renderItem={(
+            { data: { date, degree, institution, location } },
+            key
+          ) => (
             <Item
               key={key}
-              left={period}
-              title={institution}
+              left={date}
+              title={`${degree} at ${institution}`}
               detail={location}
             />
           )}
@@ -177,16 +204,10 @@ export default function Home() {
       </Section>
       <Section>
         <Heading as="h3">Volunteering</Heading>
-        <ItemList
-          data={[
-            {
-              year: "2015",
-              title: "Fundación Caminos de Luz",
-              location: "Panama",
-            },
-          ]}
-          renderItem={({ year, title, location }, key) => (
-            <Item key={key} left={year} title={title} detail={location} />
+        <ItemList<MDX<Volunteering>>
+          data={volunteering}
+          renderItem={({ data: { date, company, location } }, key) => (
+            <Item key={key} left={date} title={company} detail={location} />
           )}
         />
       </Section>
@@ -227,4 +248,6 @@ export default function Home() {
       </Section>
     </Page>
   );
-}
+};
+
+export default Home;

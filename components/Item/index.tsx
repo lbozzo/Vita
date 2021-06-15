@@ -1,5 +1,5 @@
 /** @jsxImportSource theme-ui */
-import { useMemo, useState } from "react";
+import React, { Key, useMemo, useState } from "react";
 import { Box, Button, Flex, IconButton, Text } from "@theme-ui/components";
 import { FC, ReactNode } from "react";
 import { IconArrowNarrowLeft, IconArrowNarrowRight } from "@tabler/icons";
@@ -105,7 +105,7 @@ const Pagination = ({
   );
 };
 
-export const ItemList = ({
+export function ItemList<T extends {}>({
   space,
   data,
   renderItem,
@@ -113,11 +113,11 @@ export const ItemList = ({
   pageSize = 0,
 }: {
   space?: number;
-  data: Array<any>;
-  renderItem: Function;
+  data: T[];
+  renderItem: (data: T, key?: Key) => JSX.Element;
   enablePagination?: boolean;
   pageSize?: number;
-}) => {
+}) {
   const [page, setPage] = useState<number>(0);
   const [itemList, setItemList] = useState<typeof data>([]);
   const pages = Math.ceil(data.length / pageSize);
@@ -171,4 +171,4 @@ export const ItemList = ({
       )}
     </>
   );
-};
+}
