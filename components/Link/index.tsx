@@ -1,13 +1,13 @@
 /** @jsxImportSource theme-ui */
-import { cloneElement, FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { Box, Link as TLink } from "theme-ui";
-import { IconArrowUpRight, IconLink } from "@tabler/icons";
+import { IconArrowUpRight } from "@tabler/icons";
 import NLink, { LinkProps as NLinkProps } from "next/link";
 
-const Link: FC<Pick<NLinkProps, "href">> = ({ href, children }) => {
-  const [isExternal, setExternal] = useState<boolean>(
-    !href.toString().startsWith("/")
-  );
+interface LinkProps extends Pick<NLinkProps, "href"> {}
+
+const Link: FC<LinkProps> = ({ href, children }) => {
+  const isExternal = !href.toString().startsWith("/");
 
   return (
     <Box>

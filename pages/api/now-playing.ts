@@ -1,7 +1,25 @@
 import { getNowPlaying } from "../../lib/spotify";
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiHandler } from "next";
 
-export default async function handler(_: NextApiRequest, res: NextApiResponse) {
+export type NowPlaying =
+  | {
+      album: string;
+      albumImageUrl: string;
+      artist: string;
+      isPlaying: boolean;
+      songUrl: string;
+      title: string;
+    }
+  | {
+      album?: string;
+      albumImageUrl?: string;
+      artist?: string;
+      songUrl?: string;
+      title?: string;
+      isPlaying: boolean;
+    };
+
+const handler: NextApiHandler<NowPlaying> = async (_, res) => {
   const response = await getNowPlaying();
 
   if (response.status === 204 || response.status > 400) {
@@ -29,4 +47,6 @@ export default async function handler(_: NextApiRequest, res: NextApiResponse) {
     songUrl,
     title,
   });
-}
+};
+
+export default handler;
