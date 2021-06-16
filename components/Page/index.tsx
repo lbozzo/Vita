@@ -7,15 +7,15 @@ const Page: FC = ({ children }) => {
   return (
     <>
       <NextSeo
-        title="Lucas Bozzo - Web Developer"
-        description="Full-stack developer focused on Web technologies and hybrid mobile apps and aspiring UI Designer. I'm based in London, United Kingdom."
+        title="Lucas Bozzo - Front-end Engineer"
+        description="Front-end engineer focused on Web technologies and hybrid mobile apps and aspiring UI Designer. I'm based in London, United Kingdom."
         canonical="https://www.lucasbozzo.dev/"
         openGraph={{
           url: "https://www.lucasbozzo.dev/",
-          title: "Lucas Bozzo - Web Developer",
+          title: "Lucas Bozzo - Front-end Engineer",
           description:
-            "Full-stack developer focused on Web technologies and hybrid mobile apps and aspiring UI Designer. I'm based in London, United Kingdom.",
-          site_name: "Lucas Bozzo - Web Developer",
+            "Front-end engineer developer focused on Web technologies and hybrid mobile apps and aspiring UI Designer. I'm based in London, United Kingdom.",
+          site_name: "Lucas Bozzo - Front-end Engineer",
         }}
         twitter={{
           handle: "@ljbozzo",

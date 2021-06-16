@@ -35,8 +35,8 @@ export default {
     heading: '"Karla", sans-serif',
   },
   fontWeights: {
-    body: 300,
-    heading: 400,
+    body: "300",
+    heading: "400",
   },
   colors: {
     primary: palette.darkGray["3"],

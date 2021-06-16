@@ -124,7 +124,7 @@ const Home: NextPage<HomeProps> = ({
         </Box>
         <Box sx={{ flex: 1 }} marginLeft={16}>
           <Heading sx={{ fontSize: 26, lineHeight: 1 }}>Lucas Bozzo</Heading>
-          <Text>Web Developer based in London.</Text>
+          <Text>Front-end Engineer based in London.</Text>
           <Box
             sx={{
               width: "max-content",
@@ -148,8 +148,8 @@ const Home: NextPage<HomeProps> = ({
       <Section>
         <Heading as="h3">About</Heading>
         <Paragraph marginLeft={[16, 16, 0]}>
-          I&apos;m a full-stack developer and aspiring UI Designer focused on
-          Web technologies and hybrid mobile apps. I'm based in London, United
+          I&apos;m a front-end engineer and aspiring UI Designer focused on Web
+          technologies and hybrid mobile apps. I'm based in London, United
           Kingdom. I consider myself as a traveler and coffee addict.{" "}
         </Paragraph>
       </Section>
